@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,10 +8,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>💰 Pengelola Pengeluaran</h1>
+        <h1>&#128176; Pengelola Pengeluaran</h1>
         
         <div class="card">
-            <h3>Tambah Pengeluaran Baru</h3>
+            <h3 id="form-title">Tambah Pengeluaran Baru</h3>
             <form id="expense-form">
                 <div class="form-group">
                     <label for="date">Tanggal</label>
@@ -23,14 +23,27 @@
                 </div>
                 <div class="form-group">
                     <label for="amount">Nominal (Rp)</label>
-                    <input type="number" id="amount" placeholder="Contoh: 25000" required>
+                    <input type="text" id="amount" inputmode="numeric" placeholder="Contoh: 25.000" autocomplete="off" required>
                 </div>
-                <button type="submit" class="btn-submit">Simpan Catatan</button>
+                <div class="form-group">
+                    <label for="receipt">Foto Bukti (opsional)</label>
+                    <input type="file" id="receipt" accept="image/*">
+                </div>
+                <button type="submit" class="btn-submit" id="submit-button">Simpan Catatan</button>
+                <button type="button" class="btn-cancel" id="cancel-edit" hidden>Batal Edit</button>
             </form>
         </div>
 
         <div class="card">
             <h3>Riwayat Pengeluaran</h3>
+            <div class="filter-group">
+                <label for="filter-month">Pilih Bulan &amp; Tahun:</label>
+                <input type="month" id="filter-month">
+            </div>
+            <div class="total-box">
+                <p>Total Pengeluaran:</p>
+                <h2 id="monthly-total">Rp 0</h2>
+            </div>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -38,6 +51,7 @@
                             <th>Tanggal</th>
                             <th>Barang/Keperluan</th>
                             <th>Nominal</th>
+                            <th>Bukti</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -46,17 +60,9 @@
                 </table>
             </div>
         </div>
-
-        <div class="card summary-card">
-            <h3>📅 Rekapitulasi Bulanan</h3>
-            <div class="filter-group">
-                <label for="filter-month">Pilih Bulan & Tahun:</label>
-                <input type="month" id="filter-month">
-            </div>
-            <div class="total-box">
-                <p>Total Pengeluaran Bulan Ini:</p>
-                <h2 id="monthly-total">Rp 0</h2>
-            </div>
+        <div class="receipt-modal" id="receipt-modal" hidden role="dialog" aria-modal="true" aria-label="Foto bukti">
+            <button type="button" class="receipt-modal-close" id="receipt-modal-close" aria-label="Tutup">&times;</button>
+            <img id="receipt-modal-image" alt="Foto bukti pengeluaran">
         </div>
     </div>
 
